@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Touboul</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/style/main.css">
+</head>
+
+<body>
+    <div class="loader">
+        <h2>MadeByWill</h2>
+    </div>
+    <div class="nav is_closed">
+        <div class="nav_logo">
+            <p>MadeByWill</p>
+        </div>
+        <div class="button_nav">
+            <p>+</p>
+        </div>
+    </div>
+
+    <div class="opened_nav">
+        <div class="opened_nav_inner">
+            <div class="opened_nav_button">
+                <p>Portfolio</p>
+            </div>
+            <div class="opened_nav_button">
+                <p>A propos</p>
+            </div>
+            <div class="opened_nav_button">
+                <p>Services</p>
+            </div>
+            <div class="opened_nav_button">
+                <p>Blog</p>
+            </div>
+            <div class="opened_nav_button">
+                <p>Contact</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="header">
+
+        <div class="info_row">
+            <h1 class="split">William Touboul</h1>
+            <div class="info_right">
+                <p>Basé en France</p>
+                <p class="disp">Disponible</p>
+            </div>
+        </div>
+
+
+        <h2 class="split">Designer & Developpeur Web</h2>
+    </section>
+
+    <section class="main_image">
+        <!-- Image en background image-->
+        <h2 class="slide_from_left">SHOW</h2>
+        <h2 class="slide_from_right">CASE</h2>
+    </section>
+
+    <section class="about">
+        <h2>A propos</h2>
+        <div class="about_inner">
+            <div class="left">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit itaque architecto eligendi quo
+                    reprehenderit
+                    iste, maiores ea aspernatur repudiandae dignissimos sequi omnis quisquam blanditiis vel quaerat ab?
+                    Vitae,
+                    dolor dolore neque a error voluptatem dolorum harum reprehenderit velit! Dolor explicabo accusamus
+                    cumque.
+                    Pariatur, soluta accusamus eius ipsa veritatis doloribus cum quasi molestias delectus corporis ullam
+                    praesentium qui adipisci?
+                </p>
+            </div>
+            <div class="right">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas tempora inventore porro ab harum!</p>
+            </div>
+        </div>
+    </section>
+    <section class="spacer">
+
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
+    <script src="assets/javascript/lenisinit.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fonction pour split les textes en span.
+        function splitText(elem) {
+            let text = elem.textContent;
+            let splitChars = text.split(/(?!^)/u);
+
+            elem.textContent = "";
+            for (let i = 0; i < splitChars.length; i++) {
+                elem.innerHTML += '<span class="splitted">' + splitChars[i] + '</span>';
+            }
+        }
+
+        const text_to_split = document.querySelectorAll('.split');
+        console.log(text_to_split);
+
+        text_to_split.forEach(element => {
+            splitText(element);
+        });
+
+        const splitted = document.querySelectorAll('.splitted');
+
+        const marquee = document.querySelector('.marquee');
+
+        const main_image = document.querySelector('.main_image');
+        const slide_from_left = document.querySelector('.slide_from_left');
+        const slide_from_right = document.querySelector('.slide_from_right');
+        const info_right = document.querySelector('.info_right');
+        const loader = document.querySelector('.loader');
+
+        var load_tl = gsap.timeline();
+
+        load_tl.to(loader, {
+            y: '-100vh',
+            duration: .8,
+            delay: 1.5,
+            ease: CustomEase.create("custom", "M0,0 C0.435,0.25 0.15,0.965 1,1 "),
+            position: 0,
+        });
+
+        load_tl.from(splitted, {
+            y: -65,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.08,
+            ease: CustomEase.create("custom", "M0,0 C0.435,0.25 0.15,0.965 1,1 "),
+            position: 1,
+        });
+
+        // load_tl.from(info_right, {
+        //     y: -300,
+        //     opacity: 0,
+        //     duration: 1.2,
+        //     ease: CustomEase.create("custom", "M0,0 C0.435,0.25 0.15,0.965 1,1 "),
+        //     position : 1
+        // })
+
+        load_tl.from(main_image, {
+            y: 300,
+            opacity: 0,
+            duration: 1.2,
+            ease: CustomEase.create("custom", "M0,0 C0.435,0.25 0.15,0.965 1,1 "),
+        })
+
+
+
+        gsap.from(main_image, {
+            scrollTrigger: {
+                trigger: main_image,
+                scrub: true,
+                end: 'top 30%',
+            },
+
+            width: '94vw'
+
+        });
+
+
+        gsap.from(slide_from_left, {
+            scrollTrigger: {
+                trigger: main_image,
+                scrub: true,
+                end: 'top 30%',
+            },
+            x: '-50vw'
+        })
+
+        gsap.from(slide_from_right, {
+            scrollTrigger: {
+                trigger: main_image,
+                scrub: true,
+                end: 'top 30%',
+            },
+            x: '50vw'
+        })
+
+
+
+    </script>
+    <script src="assets/javascript/marquee.js"></script>
+    <script src="assets/javascript/nav_behavior.js"></script>
+</body>
+
+
+</html>
