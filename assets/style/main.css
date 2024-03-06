@@ -1,22 +1,48 @@
 @font-face {
-  font-family: "n27";
-  src: url("../fonts/n27/n27-regular-webfont.woff") format("woff"), url("../fonts/n27/n27-regular-webfont.woff2") format("woff2");
+  font-family: "bigger";
+  src: url("../fonts/BiggerDisplay.otf") format("opentype");
 }
 @font-face {
-  font-family: "telegraf";
-  src: url("../fonts/telegraf/PPTelegraf-Ultralight.otf") format("opentype");
-}
-@font-face {
-  font-family: "inktrap_reg";
-  src: url("../fonts/NeueMachina/PPNeueMachina-InktrapRegular.otf") format("opentype");
+  font-family: "protest";
+  src: url("../fonts/ProtestGrotesk-70-Light-Trial.woff") format("woff");
 }
 :root {
-  font-size: 16px;
-  --grey: #e9e9e9;
-  --black: #181818;
+  font-size: 18px;
+  --grey: #ebeaeb;
+  --black: #272627;
   --accent: #5e44e5;
-  --font_title: "n27";
-  --font_text: "telegraf";
+  --h1_font: "bigger";
+  --h2_font: "bigger";
+  --h3_font: "bigger";
+  --p_font: "protest";
+  --h1_size: 12rem;
+  --h2_size: 4rem;
+  --h3_size: 2rem;
+  --p_size: 1rem;
+}
+
+h1 {
+  font-family: var(--h1_font);
+  font-size: var(--h1_size);
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: var(--h2_font);
+  font-size: var(--h2_size);
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: var(--h3_font);
+  font-size: var(--h3_size);
+  text-transform: uppercase;
+}
+
+p {
+  font-family: var(--p_font);
+  font-size: var(--p_size);
+  line-height: 150%;
 }
 
 * {
@@ -26,18 +52,22 @@
 }
 
 ::-moz-selection {
-  color: var(--black);
-  background-color: var(--accent);
+  color: var(--accent);
+  background-color: transparent;
 }
 
 ::selection {
-  color: var(--black);
-  background-color: var(--accent);
+  color: var(--accent);
+  background-color: transparent;
 }
 
 body {
   background-color: var(--grey);
   scroll-behavior: smooth;
+}
+
+.no_scroll {
+  overflow: hidden;
 }
 
 h1,
@@ -67,70 +97,204 @@ a:hover {
   text-decoration: underline;
 }
 
+section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.cursor {
+  position: fixed;
+  height: 2rem;
+  width: 2rem;
+  background-color: var(--black);
+  opacity: 0.7;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    MAIN                                    */
+/* -------------------------------------------------------------------------- */
 nav {
   display: flex;
+  flex-direction: row;
+  align-items: start;
   justify-content: space-between;
-  align-items: center;
-  padding-left: 4rem;
-  padding-right: 4rem;
-  height: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  position: sticky;
+  top: 0;
 }
-nav .nav_button {
-  border: 1px solid var(--black);
-  width: 2rem;
-  height: 2rem;
+nav div {
+  width: 33%;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--black);
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease-out;
+  align-items: start;
 }
-nav .nav_button:hover {
-  background-color: var(--accent);
-  color: var(--grey);
-  border-radius: 50%;
-  transform: rotate(180deg);
-  border: 0px solid var(--black);
+nav div:first-child {
+  justify-content: start;
+}
+nav div:first-child h2 {
+  font-weight: bold;
+}
+nav div:nth-child(2) {
+  justify-content: center;
+}
+nav div:nth-child(3) {
+  justify-content: end;
+}
+nav h2,
+nav p {
+  font-family: "protest" !important;
+  font-size: 1rem;
 }
 
 .header {
-  padding: 4rem;
-  height: calc(100dvh - 4rem);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-.header > div {
-  height: 100%;
-}
-.header .left {
-  width: 30%;
-}
-.header .right {
-  width: 70%;
   gap: 2rem;
+}
+.header .top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
+}
+.header .top .left h1 {
+  padding-right: 50%;
+}
+.header .top .right {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  font-family: "protest";
+  font-size: 2rem;
+}
+.header .bottom {
+  height: 90vh;
+  width: 100%;
+}
+.header .bottom > .image_container {
+  height: 100%;
+  width: 100%;
+}
+
+section.about {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  gap: 2rem;
+}
+section.about .top {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+section.about .top > div {
+  width: 50%;
+}
+section.about .top .left h2 {
+  font-size: 12rem;
+}
+section.about .top .right {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  padding-bottom: 2rem;
+}
+section.about .top .right p {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+section.about .bottom {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+section.about .bottom > div {
+  width: 50%;
+}
+section.about .bottom .left {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+section.about .bottom .left p {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+section.project {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  height: 110vh;
+}
+section.project .left {
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
-.header .right > .image_container {
-  height: 70%;
+section.project .left div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-bottom: 1px var(--black) solid;
+}
+section.project .left div:first-child {
+  border-top: 1px var(--black) solid;
+}
+section.project .left div:before {
+  content: "";
+  position: absolute;
+  height: 100%;
   width: 100%;
+  background-color: var(--black);
+  left: -100%;
+  transition: all 500ms ease-in;
+  z-index: -1;
 }
-.header .right .title_container {
-  height: 30%;
-  padding-left: 0 !important;
+section.project .left div:hover h3,
+section.project .left div:hover p {
+  color: var(--grey);
+  font-weight: 200;
+  mix-blend-mode: exclusion;
 }
-.header .right .title_container h2 {
-  font-family: "inktrap_reg";
-  color: var(--black);
-  font-weight: 400 !important;
-  font-size: 6rem;
-  margin-left: -8px;
+section.project .left div:hover:before {
+  left: 0;
+}
+section.project .right {
+  background-image: url("");
+  background-size: cover;
+  background-position: center center;
+  width: 50%;
+  height: 100% !important;
+  filter: grayscale(100%);
+  transition: all 0.2s ease-in;
+}
+section.project .right:hover {
+  filter: grayscale(0);
 }
 
+/* --------------------------- CSS POUR LES IMAGES -------------------------- */
 .image_container {
   position: relative;
   overflow: hidden;
@@ -143,7 +307,7 @@ nav .nav_button:hover {
 }
 
 .image_container:hover {
-  filter: saturate(0.5);
+  filter: saturate(0.4);
 }
 
 .image_container > * {
@@ -153,4 +317,45 @@ nav .nav_button:hover {
   height: 100% !important;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+#square_container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 10000;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background: var(--black);
+  pointer-events: none;
+}
+
+.content_overlay {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  gap: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #242424;
+  color: #fff;
+  z-index: -1;
+}
+
+strong:hover {
+  color: var(--accent);
 }/*# sourceMappingURL=main.css.map */

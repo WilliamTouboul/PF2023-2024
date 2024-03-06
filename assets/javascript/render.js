@@ -59,7 +59,7 @@ image_wide.forEach((elem) => {
         scene = new THREE.Scene();
         if (elem.classList.contains('big_image')) {
             camera = new THREE.PerspectiveCamera(
-                43,
+                33,
                 inner.offsetWidth / inner.offsetHeight,
                 .01,
                 10
