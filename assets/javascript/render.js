@@ -64,9 +64,16 @@ image_wide.forEach((elem) => {
                 .01,
                 10
             );
+        } else if (elem.classList.contains('small_image')) {
+            camera = new THREE.PerspectiveCamera(
+                56,
+                inner.offsetWidth / inner.offsetHeight,
+                0.01,
+                10
+            );
         } else {
             camera = new THREE.PerspectiveCamera(
-                80,
+                70,
                 inner.offsetWidth / inner.offsetHeight,
                 0.01,
                 10
